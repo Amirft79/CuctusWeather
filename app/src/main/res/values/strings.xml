@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CuctusWeather</string>
+    <string name="use_finger">use finger</string>
 </resources>
