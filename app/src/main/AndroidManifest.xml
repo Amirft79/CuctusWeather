@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".StartActivity"
+            android:name=".Ac.StartActivity"
             android:exported="false" >
         </activity>
     </application>

@@ -1,9 +1,12 @@
-package com.example.co.cuctusweather
+package com.example.co.cuctusweather.Ac
 
+import android.annotation.SuppressLint
+import android.app.Dialog
 import android.app.KeyguardManager
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.hardware.biometrics.BiometricPrompt
 import android.os.Build
@@ -12,9 +15,10 @@ import android.os.CancellationSignal
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.example.co.cuctusweather.HomeActivity
+import com.example.co.cuctusweather.ShowToast
 import com.example.co.cuctusweather.databinding.ActivityStartBinding
-import java.util.*
-import kotlin.concurrent.schedule
+import com.example.co.cuctusweather.databinding.CreateAccountLayoutBinding
 
 class StartActivity : AppCompatActivity() {
     private var cancelationsignal:CancellationSignal?=null
@@ -29,13 +33,15 @@ class StartActivity : AppCompatActivity() {
 
                 override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult?) {
                     super.onAuthenticationSucceeded(result)
-                    val intent= Intent(this@StartActivity,HomeActivity::class.java)
+                    val intent= Intent(this@StartActivity, HomeActivity::class.java)
                     startActivity(intent)
                     ShowToast("welcome !!!!!")
                 }
 
             }
     private lateinit var  binding:ActivityStartBinding
+    private lateinit var  perf:SharedPreferences
+    @SuppressLint("CommitPrefEdits")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityStartBinding.inflate(layoutInflater)
@@ -52,6 +58,47 @@ class StartActivity : AppCompatActivity() {
                     ShowToast("canel")
                 }).build()
         biometricPrompt.authenticate(getcancelationsignal(),mainExecutor,autenticationcallback)
+        // input password and create account
+        binding.addAccount.setOnClickListener {
+            val dialogBinding:CreateAccountLayoutBinding = CreateAccountLayoutBinding.inflate(layoutInflater)
+            val dialog:Dialog= Dialog(this)
+            dialog.setContentView(dialogBinding.root)
+            dialogBinding.createAccount.setOnClickListener {
+                if (dialogBinding.inputUsername.text.isEmpty()||dialogBinding.inputPassword.text.isEmpty()){
+                    ShowToast("enter your user name and password")
+                }
+                else{
+                    perf=getSharedPreferences("weather_password",0)
+                    val editor:SharedPreferences.Editor=perf.edit()
+                    editor.putString("password",dialogBinding.inputPassword.text.toString())
+                    editor.apply()
+                    binding.addAccount.isEnabled=false
+                    dialog.dismiss()
+                }
+            }
+            dialog.show()
+
+        }
+        binding.signIn.setOnClickListener {
+            if (binding.inputPassword.text.isEmpty()) {
+                ShowToast("please enter your password")
+               binding.signIn.isEnabled=false
+           }
+           else{
+               val prefernce:SharedPreferences=getSharedPreferences("weather_password",0)
+               val edite:SharedPreferences.Editor=prefernce.edit()
+               val password: String? =prefernce.getString("password","null")
+               if (password==binding.inputPassword.text.toString()){
+                   val intent= Intent(this@StartActivity, HomeActivity::class.java)
+                   startActivity(intent)
+               }
+               else{
+                   ShowToast("password is incorrect")
+               }
+
+           }
+       }
+
         //btn_on_finger
         binding.btnUserFinger.setOnClickListener {
             val biometricPrompt: BiometricPrompt = BiometricPrompt.Builder(this)

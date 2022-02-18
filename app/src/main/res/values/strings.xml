@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">CuctusWeather</string>
     <string name="use_finger">use finger</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="password">password</string>
+    <string name="creat_simple_accaunt">creat simple accaunt</string>
+    <string name="username">username</string>
+    <string name="sgin_in">sgin in</string>
 </resources>
