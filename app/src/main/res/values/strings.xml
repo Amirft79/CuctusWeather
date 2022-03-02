@@ -7,4 +7,14 @@
     <string name="creat_simple_accaunt">creat simple accaunt</string>
     <string name="username">username</string>
     <string name="sgin_in">sgin in</string>
+    <string name="text_into">wellcome to weather app please first sign in or create local account or you can sign in with your finger</string>
+    <string name="search_weather_by_cityname">search weather by cityname</string>
+    <string name="city_name">city name</string>
+    <string name="search_city">search city</string>
+    <string name="weather_result">Weather result</string>
+    <string name="search">Search</string>
+    <string name="result">Result</string>
+    <string name="_20km_h">20km/h</string>
+    <string name="cloudy">Cloudy</string>
+    <string name="_11">11</string>
 </resources>

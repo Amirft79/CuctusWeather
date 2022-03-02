@@ -8,10 +8,13 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.hardware.biometrics.BiometricPrompt
 import android.os.Build
 import android.os.Bundle
 import android.os.CancellationSignal
+import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -58,27 +61,34 @@ class StartActivity : AppCompatActivity() {
                     ShowToast("canel")
                 }).build()
         biometricPrompt.authenticate(getcancelationsignal(),mainExecutor,autenticationcallback)
-        // input password and create account
-        binding.addAccount.setOnClickListener {
-            val dialogBinding:CreateAccountLayoutBinding = CreateAccountLayoutBinding.inflate(layoutInflater)
-            val dialog:Dialog= Dialog(this)
-            dialog.setContentView(dialogBinding.root)
-            dialogBinding.createAccount.setOnClickListener {
-                if (dialogBinding.inputUsername.text.isEmpty()||dialogBinding.inputPassword.text.isEmpty()){
-                    ShowToast("enter your user name and password")
-                }
-                else{
-                    perf=getSharedPreferences("weather_password",0)
-                    val editor:SharedPreferences.Editor=perf.edit()
-                    editor.putString("password",dialogBinding.inputPassword.text.toString())
-                    editor.apply()
-                    binding.addAccount.isEnabled=false
-                    dialog.dismiss()
-                }
-            }
-            dialog.show()
-
+        //user password and login
+        perf = getSharedPreferences("weather_password", 0)
+        val editor: SharedPreferences.Editor = perf.edit()
+        if (perf.getString("password","null").toString()!="null"){
+            binding.addAccount.visibility=View.GONE
         }
+        else {
+            binding.addAccount.setOnClickListener {
+                val dialogBinding: CreateAccountLayoutBinding =
+                    CreateAccountLayoutBinding.inflate(layoutInflater)
+                val dialog: Dialog = Dialog(this)
+                dialog.setContentView(dialogBinding.root)
+                dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                dialogBinding.createAccount.setOnClickListener {
+                    if (dialogBinding.inputUsername.text.isEmpty() || dialogBinding.inputPassword.text.isEmpty()) {
+                        ShowToast("enter your user name and password")
+                    } else {
+                        editor.putString("password", dialogBinding.inputPassword.text.toString())
+                        editor.apply()
+                        binding.addAccount.visibility = View.GONE
+                        dialog.dismiss()
+                    }
+                }
+                dialog.show()
+
+            }
+        }
+        //init password
         binding.signIn.setOnClickListener {
             if (binding.inputPassword.text.isEmpty()) {
                 ShowToast("please enter your password")
@@ -91,6 +101,8 @@ class StartActivity : AppCompatActivity() {
                if (password==binding.inputPassword.text.toString()){
                    val intent= Intent(this@StartActivity, HomeActivity::class.java)
                    startActivity(intent)
+                   ShowToast("welcome !!!!!")
+
                }
                else{
                    ShowToast("password is incorrect")
@@ -98,8 +110,7 @@ class StartActivity : AppCompatActivity() {
 
            }
        }
-
-        //btn_on_finger
+        //btn_on_finger scan
         binding.btnUserFinger.setOnClickListener {
             val biometricPrompt: BiometricPrompt = BiometricPrompt.Builder(this)
                 .setTitle("fingetprint")
@@ -138,7 +149,7 @@ class StartActivity : AppCompatActivity() {
         }
         return cancelationsignal as CancellationSignal
     }
-
+    //every time activity start
     override fun onStart() {
         super.onStart()
         val biometricPrompt: BiometricPrompt = BiometricPrompt.Builder(this)

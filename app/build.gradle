@@ -40,7 +40,9 @@ android {
 
 dependencies {
     //navigation
+    //noinspection GradleDependency
     implementation ("androidx.navigation:navigation-fragment-ktx:$nav_version")
+    //noinspection GradleDependency
     implementation ("androidx.navigation:navigation-ui-ktx:$nav_version")
     //base
     implementation 'androidx.core:core-ktx:1.7.0'

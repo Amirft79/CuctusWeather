@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/searchCityFragment"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="@string/search_city">
+    </item>
+    <item
+        android:id="@+id/weatherResultFragment"
+        android:icon="@drawable/ic_baseline_whatshot_24"
+        android:title="@string/weather_result">
+    </item>
+
+</menu>

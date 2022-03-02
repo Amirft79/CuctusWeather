@@ -4,7 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#3e4045"
     tools:context=".Ac.StartActivity">
+
+
+    <TextView
+        android:id="@+id/tv_intro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_into"
+        android:textAlignment="center"
+        android:textColor="@color/primary_green"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        style="@style/Widget.Material3.AutoCompleteTextView.FilledBox"
+        app:layout_constraintBottom_toTopOf="@+id/input_password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022">
+    </TextView>
 
 
     <EditText
@@ -12,26 +31,26 @@
         style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:hint="@string/password"
         android:inputType="textPassword"
         android:textAlignment="center"
         android:textColor="#00695C"
-        android:hint="@string/password"
         android:textColorHint="#00695C"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_user_finger"
         app:layout_constraintEnd_toEndOf="@id/btn_user_finger"
-        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="@id/btn_user_finger"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.586">
     </EditText>
-
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/sign_in"
         style="@style/Widget.Material3.Button"
-        android:layout_width="182dp"
-        android:layout_height="54dp"
+        android:layout_width="372dp"
+        android:layout_height="65dp"
         android:outlineAmbientShadowColor="@color/primary_green"
         android:outlineSpotShadowColor="@color/second_green"
         android:text="@string/sgin_in"
@@ -39,10 +58,11 @@
         android:textSize="25sp"
         app:layout_constraintBottom_toTopOf="@+id/btn_user_finger"
         app:layout_constraintEnd_toEndOf="@id/btn_user_finger"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="@+id/btn_user_finger"
-        app:layout_constraintTop_toBottomOf="@id/input_password">
+        app:layout_constraintTop_toBottomOf="@id/input_password"
+        app:layout_constraintVertical_bias="0.632">
     </com.google.android.material.button.MaterialButton>
-
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_user_finger"
@@ -50,7 +70,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="412dp"
+        android:layout_marginTop="424dp"
         android:layout_marginEnd="15dp"
         android:text="@string/use_finger"
         android:textAlignment="center"
@@ -68,18 +88,20 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/add_account"
+        style="@style/Widget.Material3.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:outlineAmbientShadowColor="@color/primary_green"
+        android:outlineSpotShadowColor="@color/second_green"
+        android:text="@string/creat_simple_accaunt"
         android:textColor="#2E7D32"
         android:textSize="25sp"
-        android:outlineSpotShadowColor="@color/second_green"
-        android:outlineAmbientShadowColor="@color/primary_green"
-        style="@style/Widget.Material3.Button.OutlinedButton"
-        android:text="@string/creat_simple_accaunt"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_user_finger"
+        app:layout_constraintEnd_toEndOf="@id/btn_user_finger"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="@id/btn_user_finger"
-        app:layout_constraintEnd_toEndOf="@id/btn_user_finger">
+        app:layout_constraintTop_toBottomOf="@id/btn_user_finger"
+        app:layout_constraintVertical_bias="0.19">
     </com.google.android.material.button.MaterialButton>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

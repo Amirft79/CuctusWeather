@@ -9,10 +9,26 @@
         android:id="@+id/searchCityFragment"
         android:name="com.example.co.cuctusweather.SearchCityFragment"
         android:label="fragment_search_city"
-        tools:layout="@layout/fragment_search_city" />
+        tools:layout="@layout/fragment_search_city" >
+        <action
+            android:id="@+id/action_searchCityFragment_to_weatherResultFragment"
+            app:destination="@id/weatherResultFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
     <fragment
         android:id="@+id/weatherResultFragment"
-        android:name="com.example.co.cuctusweather.WeatherResultFragment"
+        android:name="com.example.co.cuctusweather.ui.WeatherResultFragment"
         android:label="fragment_weather_result"
-        tools:layout="@layout/fragment_weather_result" />
+        tools:layout="@layout/fragment_weather_result" >
+        <action
+            android:id="@+id/action_weatherResultFragment_to_searchCityFragment"
+            app:destination="@id/searchCityFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
 </navigation>
